@@ -8,7 +8,7 @@ RUN <<EOF
 pacman -Syu --noconfirm
 pacman -S --noconfirm geany geany-plugins nano mc kitty
 pacman -S --noconfirm diffutils gcc gdb python python-pip python-black python-pylint python-pytest
-pacman -S --noconfirm patch git tmuxp 
+pacman -S --noconfirm patch git tmuxp openssh
 pacman -S --noconfirm strace
 EOF
 
