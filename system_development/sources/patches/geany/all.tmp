@@ -1,0 +1,381 @@
+Only in /geany_conf_bk/: all.tmp
+Only in ./: filedefs
+diff /geany_conf_bk/geany.conf ./geany.conf
+23,24c23,25
+< show_indent_guide=true
+< show_white_space=true
+---
+> use_native_dialogs=false
+> show_indent_guide=false
+> show_white_space=false
+26c27
+< show_line_endings_only_when_differ=true
+---
+> show_line_endings_only_when_differ=false
+31c32
+< long_line_column=80
+---
+> long_line_column=72
+45c46
+< line_break_column=80
+---
+> line_break_column=72
+54c55
+< pref_editor_ensure_convert_line_endings=true
+---
+> pref_editor_ensure_convert_line_endings=false
+56c57
+< pref_editor_trail_space=true
+---
+> pref_editor_trail_space=false
+65c66
+< pref_template_mail=user@NABUNOUT
+---
+> pref_template_mail=root@89bd4471e75b
+98c99
+< indent_type=0
+---
+> indent_type=1
+106c107
+< color_scheme=monokai.conf
+---
+> color_scheme=
+108c109
+< mru_length=30
+---
+> mru_length=10
+120c121
+< show_keep_edit_history_on_reload_msg=false
+---
+> show_keep_edit_history_on_reload_msg=true
+126a128
+> skip_confirmation_for_replace_in_session=false
+136,137d137
+< use_native_dialogs=false
+< skip_confirmation_for_replace_in_session=false
+145c145
+< print_cmd=lpr '%f'
+---
+> print_cmd_common_format=
+152d151
+< print_cmd_common_format=lpr '%d/%f'
+161c160
+< follow_path=true
+---
+> follow_path=false
+166c165
+< shell=/bin/bash
+---
+> shell=/usr/bin/bash
+180c179
+< pref_search_current_file_dir=false
+---
+> pref_search_current_file_dir=true
+185,187c184,186
+< fif_recursive=true
+< fif_extra_options=--exclude-dir=.*git --exclude-dir=*build_ref
+< fif_use_extra_options=true
+---
+> fif_recursive=false
+> fif_extra_options=
+> fif_use_extra_options=false
+192c191
+< find_case_sensitive=true
+---
+> find_case_sensitive=false
+199c198
+< replace_case_sensitive=true
+---
+> replace_case_sensitive=false
+201c200
+< replace_match_whole_word=true
+---
+> replace_match_whole_word=false
+diff /geany_conf_bk/keybindings.conf ./keybindings.conf
+1,239d0
+< [Bindings]
+< menu_new=<Primary>n
+< menu_open=<Primary>o
+< menu_open_selected=<Primary><Shift>o
+< menu_save=<Primary>s
+< menu_saveas=
+< menu_saveall=<Primary><Shift>s
+< file_properties=<Primary><Shift>v
+< menu_print=<Primary>p
+< menu_close=<Primary>w
+< menu_closeall=<Primary><Shift>w
+< menu_reloadfile=<Primary>r
+< menu_reloadall=
+< file_openlasttab=
+< menu_quit=<Primary>q
+< menu_undo=<Primary>z
+< menu_redo=<Primary>y
+< edit_duplicateline=<Primary>d
+< edit_deleteline=<Primary>k
+< edit_deletelinetoend=<Primary><Shift>Delete
+< edit_deletelinetobegin=<Primary><Shift>BackSpace
+< edit_transposeline=
+< edit_scrolltoline=<Primary><Shift>l
+< edit_scrolllineup=<Alt>Up
+< edit_scrolllinedown=<Alt>Down
+< edit_completesnippet=Tab
+< move_snippetnextcursor=
+< edit_suppresssnippetcompletion=
+< popup_contextaction=
+< edit_autocomplete=<Primary>space
+< edit_calltip=
+< edit_wordpartcompletion=Tab
+< edit_movelineup=<Alt>Page_Up
+< edit_movelinedown=<Alt>Page_Down
+< menu_cut=<Primary>x
+< menu_copy=<Primary>c
+< menu_paste=<Primary>v
+< edit_copyline=<Primary><Shift>c
+< edit_cutline=<Primary><Shift>x
+< menu_selectall=<Primary>a
+< edit_selectword=<Shift><Alt>w
+< edit_selectline=<Shift><Alt>l
+< edit_selectparagraph=<Shift><Alt>p
+< edit_selectwordpartleft=
+< edit_selectwordpartright=
+< edit_togglecase=<Primary><Alt>u
+< edit_commentlinetoggle=<Primary>e
+< edit_commentline=
+< edit_uncommentline=
+< edit_increaseindent=<Primary>i
+< edit_decreaseindent=<Primary>u
+< edit_increaseindentbyspace=
+< edit_decreaseindentbyspace=
+< edit_autoindent=
+< edit_sendtocmd1=<Primary>1
+< edit_sendtocmd2=<Primary>2
+< edit_sendtocmd3=<Primary>3
+< edit_sendtocmd4=
+< edit_sendtocmd5=
+< edit_sendtocmd6=
+< edit_sendtocmd7=
+< edit_sendtocmd8=
+< edit_sendtocmd9=
+< edit_sendtovte=
+< format_reflowparagraph=<Primary>j
+< edit_joinlines=
+< menu_insert_date=<Shift><Alt>d
+< edit_insertwhitespace=
+< edit_insertlinebefore=
+< edit_insertlineafter=
+< menu_preferences=<Primary><Alt>p
+< menu_pluginpreferences=
+< menu_find=<Primary>f
+< menu_findnext=<Primary>g
+< menu_findprevious=<Primary><Shift>g
+< menu_findnextsel=
+< menu_findprevsel=
+< menu_replace=<Primary>h
+< menu_findinfiles=<Primary><Shift>f
+< menu_nextmessage=
+< menu_previousmessage=
+< popup_findusage=<Primary><Shift>e
+< popup_finddocumentusage=<Primary><Shift>d
+< find_markall=<Primary><Shift>m
+< nav_back=<Alt>Left
+< nav_forward=<Alt>Right
+< menu_gotoline=<Primary>l
+< edit_gotomatchingbrace=<Primary>b
+< edit_togglemarker=<Primary>m
+< edit_gotonextmarker=<Primary>period
+< edit_gotopreviousmarker=<Primary>comma
+< popup_gototagdefinition=<Primary>t
+< popup_gototagdeclaration=<Primary><Shift>t
+< edit_gotolinestart=Home
+< edit_gotolineend=End
+< edit_gotolinestartvisual=<Alt>Home
+< edit_gotolineendvisual=<Alt>End
+< edit_prevwordstart=<Primary>slash
+< edit_nextwordstart=<Primary>backslash
+< menu_toggleall=
+< menu_fullscreen=F11
+< menu_messagewindow=
+< toggle_sidebar=
+< menu_zoomin=<Primary>plus
+< menu_zoomout=<Primary>minus
+< normal_size=<Primary>0
+< menu_linewrap=
+< menu_linebreak=
+< menu_clone=
+< menu_strip_trailing_spaces=
+< menu_replacetabs=
+< menu_replacespaces=
+< menu_togglefold=
+< menu_foldall=
+< menu_unfoldall=
+< reloadtaglist=<Primary><Shift>r
+< remove_markers=
+< remove_error_indicators=
+< remove_markers_and_indicators=
+< project_new=
+< project_new_from_folder=
+< project_open=
+< project_properties=
+< project_close=
+< build_compile=F8
+< build_link=F9
+< build_make=<Shift>F9
+< build_makeowntarget=<Primary><Shift>F9
+< build_makeobject=<Shift>F8
+< build_nexterror=
+< build_previouserror=
+< build_run=F5
+< build_options=
+< menu_opencolorchooser=
+< menu_help=F1
+< switch_editor=F2
+< switch_search_bar=F7
+< switch_message_window=
+< switch_compiler=
+< switch_messages=
+< switch_scribble=F6
+< switch_vte=F4
+< switch_sidebar=
+< switch_sidebar_symbol_list=
+< switch_sidebar_doc_list=
+< switch_tableft=<Primary>Page_Up
+< switch_tabright=<Primary>Page_Down
+< switch_tablastused=<Primary>Tab
+< move_tableft=<Primary><Shift>Page_Up
+< move_tabright=<Primary><Shift>Page_Down
+< move_tabfirst=
+< move_tablast=
+< 
+< [addons]
+< focus_bookmark_list=
+< focus_tasks=
+< update_tasks=
+< xml_tagging=
+< copy_file_path=
+< Enclose_1=
+< Enclose_2=
+< Enclose_3=
+< Enclose_4=
+< Enclose_5=
+< Enclose_6=
+< Enclose_7=
+< Enclose_8=
+< 
+< [code_navigation]
+< switch_head_impl=<Shift><Alt>s
+< goto_file=<Shift><Alt>g
+< 
+< [commander]
+< show_panel=
+< show_panel_commands=
+< show_panel_files=
+< 
+< [extra_select]
+< column_mode=
+< goto_line_extend=
+< brace_match_extend=
+< convert_selection=
+< set_anchor=
+< select_to_anchor=
+< rect_select_to_anchor=
+< 
+< [file_browser]
+< focus_file_list=
+< focus_path_entry=
+< rename_object=
+< create_file=
+< create_dir=
+< rename_refresh=
+< track_current=
+< 
+< [geanyvc]
+< vc_show_diff_of_file=
+< vc_show_diff_of_dir=
+< vc_show_diff_of_basedir=
+< vc_commit=
+< vc_status=
+< vc_revert_file=
+< vc_revert_dir=
+< vc_revert_basedir=
+< vc_update=
+< 
+< [git-changebar]
+< goto-prev-hunk=
+< goto-next-hunk=
+< undo-hunk=
+< 
+< [Line Operations]
+< remove_duplicate_lines_s=
+< remove_duplicate_lines_o=
+< remove_unique_lines=
+< keep_unique_lines=
+< remove_empty_lines=
+< remove_whitespace_lines=
+< remove_every_nth_line=
+< sort_lines_ascending=
+< sort_lines_descending=
+< 
+< [ProjectOrganizer]
+< find_in_project=
+< find_file=
+< find_tag=
+< swap_header_source=
+< focus_project_sidebar=
+< open_file_manager=
+< open_terminal=
+< 
+< [split_window]
+< split_horizontal=<Primary><Shift>braceleft
+< split_vertical=<Primary><Shift>braceright
+< split_unsplit=<Primary><Shift>space
+< 
+< [vimode]
+< enable_vim=
+< insert_for_dummies=
+Only in /geany_conf_bk/: plugins
+diff /geany_conf_bk/session.conf ./session.conf
+2,3c2,3
+< recent_files=/media_user/user/work/TTL/tests/event_framework/ef_unit_tests.cpp;/media_user/user/work/TTL/ttl/include/EventFramework/EventDirector.h;/media_user/user/work/TTL/ttl/include/EventFramework/EventDirector.hpp;/media_user/user/work/TTL/ttl/include/EventFramework/EventBroker.hpp;/media_user/user/work/TTL/tests/event_framework/CustomEventSubscriber.h;/media_user/user/work/TTL/tests/event_framework/fixture.h;/media_user/user/work/TTL/README.md;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IControllable.hpp;/media_user/user/work/TTL/__install/include/ttl/include/EventFramework/Interfaces/IControllable.hpp;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IEventSpecificControllable.hpp;/media_user/user/work/TTL/tests/CMakeLists.txt;/media_user/user/work/TTL/tests/resource_framework/fixture.hpp;/media_user/user/work/TTL/ttl/include/EventFramework/EventTypeTraitsDeclaration.h;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IEventSpecificControllable.h;/media_user/user/work/TTL/tests/event_framework/NewFile;/media_user/user/work/TTL/tests/resource_framework/rf_unit_tests.cpp;/media_user/user/work/TTL/ttl/include/EventFramework/EventFramework.h;/media_user/user/work/TTL/tests/event_framework/CustomConfigurator.h;/media_user/user/work/TTL/tests/event_framework/CustomEvent.h;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IEventConfigurator.hpp;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IControllable.h;/media_user/user/work/TTL/__install/include/ttl/include/EventFramework/Interfaces/IEventConfigurator.hpp;/media_user/user/work/TTL/__install/include/ttl/include/EventFramework/Interfaces/IEventConfigurator.h;/media_user/user/work/TTL/ttl/include/EventFramework/Interfaces/IEventConfigurator.h;/media_user/user/work/TTL/tests/event_framework/CustomCommands.h;/media_user/user/work/TTL/tests/resource_framework/CustomResourceLoaders.h;/media_user/user/work/TTL/tests/serialize_framework/CMakeLists.txt;/media_user/user/work/TTL/tests/resource_framework/CMakeLists.txt;/media_user/user/work/TTL/tests/event_framework/CMakeLists.txt;/media_user/user/work/TTL/tests/serialize_framework/sf_unit_tests.cpp;
+< recent_projects=/media_user/user/work/TTL/TTL.geany;/media_user/user/work/Projects/ITCityNative/build_docker_test/src/ttl/ttl.geany;/media_user/user/work/pet_projects/pmccabe_builder/PMcCabe.geany;/media_user/user/work/pet_projects/pmccabe_docker/pmc_docker.geany;/media_user/user/work/pet_projects/ES/BookIndexer/ESBookIndexerClient.geany;/run/media/user/home/user/work/pet_projects/pmccabe_docker/pmc_docker.geany;
+---
+> recent_files=
+> recent_projects=
+8c8
+< project_file_path=/home/user/projects
+---
+> project_file_path=/root/projects
+11,14c11,14
+< treeview_position=512
+< msgwindow_position=657
+< geometry=-237;164;1918;998;0;
+< sidebar_page=6
+---
+> treeview_position=230
+> msgwindow_position=368
+> geometry=509;286;900;600;0;
+> sidebar_page=0
+17c17
+< last_dir=/home/user
+---
+> last_dir=/root
+21,27c21,27
+< replace_all_expanded=true
+< position_find_x=1280
+< position_find_y=697
+< position_replace_x=1056
+< position_replace_y=266
+< position_fif_x=644
+< position_fif_y=385
+---
+> replace_all_expanded=false
+> position_find_x=-1
+> position_find_y=-1
+> position_replace_x=-1
+> position_replace_y=-1
+> position_fif_x=-1
+> position_fif_y=-1
+32c32
+< active_plugins=/usr/lib/geany/addons.so;/usr/lib/geany/automark.so;/usr/lib/geany/classbuilder.so;/usr/lib/geany/codenav.so;/usr/lib/geany/commander.so;/usr/lib/geany/filebrowser.so;/usr/lib/geany/geanyvc.so;/usr/lib/geany/git-changebar.so;/usr/lib/geany/lineoperations.so;/usr/lib/geany/markdown.so;/usr/lib/geany/projectorganizer.so;/usr/lib/geany/splitwindow.so;/usr/lib/geany/treebrowser.so;
+---
+> active_plugins=;
+Only in ./: templates

@@ -1,0 +1,4 @@
+[plugins]
+load_plugins=true
+custom_plugin_path=
+active_plugins=;
