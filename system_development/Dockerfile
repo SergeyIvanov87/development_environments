@@ -10,6 +10,7 @@ pacman -S --noconfirm geany geany-plugins nano mc kitty
 pacman -S --noconfirm diffutils gcc gdb python python-pip python-black python-pylint python-pytest
 pacman -S --noconfirm patch git tmuxp openssh
 pacman -S --noconfirm strace
+pacman -S --noconfirm chromium
 EOF
 
 RUN <<EOF
@@ -44,4 +45,3 @@ EOF
 VOLUME ["/data"]
 
 ENTRYPOINT "${WORKDIR}/init.sh" "${WORKDIR}" "/data"
-
