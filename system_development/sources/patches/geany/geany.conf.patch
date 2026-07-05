@@ -13,6 +13,10 @@
 < long_line_column=80
 ---
 > long_line_column=72
+44c45
+< pref_editor_newline_strip=true
+---
+> pref_editor_newline_strip=false
 45c46
 < line_break_column=80
 ---
@@ -21,6 +25,10 @@
 < pref_editor_ensure_convert_line_endings=true
 ---
 > pref_editor_ensure_convert_line_endings=false
+55c56
+< pref_editor_replace_tabs=true
+---
+> pref_editor_replace_tabs=false
 56c57
 < pref_editor_trail_space=true
 ---
@@ -50,6 +58,10 @@
 136,137d137
 < use_native_dialogs=false
 < skip_confirmation_for_replace_in_session=false
+140c140
+< terminal_cmd=kitty -e "/bin/sh %c"
+---
+> terminal_cmd=xterm -e "/bin/sh %c"
 145c145
 < print_cmd=lpr '%f'
 ---

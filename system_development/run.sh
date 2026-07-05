@@ -11,6 +11,8 @@ docker run -it -e \
 	-v sys_devel_env.sshkeys.volume:/sshkeys \
 	-v sys_devel_env.browser.data.volume:/root/.config/mozilla/firefox \
 	--name sys_devel_env_cont \
-	is140608/sys_devel_env:0.0.2
+	is140608/sys_devel_env:0.0.3
 
-#development_environment:latest
+# TODO with a current user UID/GID
+#	--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro --user $(id -u):$(id -g) \
+
