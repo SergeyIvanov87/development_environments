@@ -10,7 +10,7 @@ pacman -S --noconfirm geany geany-plugins nano mc kitty
 pacman -S --noconfirm diffutils gcc gdb python python-pip python-black python-pylint python-pytest
 pacman -S --noconfirm patch git tmuxp openssh
 pacman -S --noconfirm strace
-pacman -S --noconfirm chromium
+pacman -S --noconfirm firefox
 EOF
 
 RUN <<EOF
@@ -30,6 +30,7 @@ COPY system_development/sources/*.sh ${WORKDIR}/
 #EOF
 RUN << EOF
 mkdir -p /root/.config/geany/
+mkdir -p /root/.config/mozilla/firefox
 cp /patches/geany/geany.conf /root/.config/geany/
 cp /patches/geany/session.conf /root/.config/geany/
 cp -r /patches/geany/plugins /root/.config/geany/
@@ -42,6 +43,6 @@ RUN <<EOF
 echo -e "export HISTFILESIZE=\nexport HISTSIZE=\nexport HISTTIMEFORMAT='%F %T '" >> /root/.bashrc
 EOF
 
-VOLUME ["/data"]
+VOLUME ["/data", "/sshkeys", "/root/.config/mozilla/firefox"]
 
 ENTRYPOINT "${WORKDIR}/init.sh" "${WORKDIR}" "/data"
