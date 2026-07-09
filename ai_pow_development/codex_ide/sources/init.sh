@@ -43,13 +43,14 @@ fi
 
 #TERM=$(basename "$(cat "/proc/$PPID/comm")")
 if [ ! -z ${PRIVATE_KEY_PATH} ]; then
-    kitty ${WORK_DIR}/register_ssh_key.sh ${PRIVATE_KEY_PATH}
+    kitty --hold ${WORK_DIR}/register_ssh_key.sh ${PRIVATE_KEY_PATH}
 fi
 
 ${WORK_DIR}/run_cmd_forever.sh geany &
 ${WORK_DIR}/run_cmd_forever.sh kitty &
 ${WORK_DIR}/run_cmd_forever.sh kitty mc &
-${WORK_DIR}/run_cmd_forever.sh firefox &
+#${WORK_DIR}/run_cmd_forever.sh firefox &
+${WORK_DIR}/run_cmd_forever.sh ${WORK_DIR}/run_codex.sh &
 
 sleep infinity &
 wait $!
