@@ -23,10 +23,9 @@ COPY --from=build /home/builduser/codex-desktop-linux-pkgbuild/*pkg.tar.zst  /pa
 COPY ai_pow_development/codex_ide/sources/*.sh /
 
 RUN <<EOF
-ls -la /packages/
+pacman -Syu --noconfirm openai-codex dbus
 pacman -U --noconfirm  /packages/*.pkg.tar.zst
 rm -r /packages/*.pkg.tar.zst
-pacman -Sy --noconfirm openai-codex
 pacman -Scc --noconfirm
 rm -rf /var/lib/pacman/sync/* /root/.cache/* /tmp/*
 EOF

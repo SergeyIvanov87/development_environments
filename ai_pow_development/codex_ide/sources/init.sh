@@ -46,6 +46,8 @@ if [ ! -z ${PRIVATE_KEY_PATH} ]; then
     kitty --hold ${WORK_DIR}/register_ssh_key.sh ${PRIVATE_KEY_PATH}
 fi
 
+eval $(dbus-launch --sh-syntax)
+
 ${WORK_DIR}/run_cmd_forever.sh geany &
 ${WORK_DIR}/run_cmd_forever.sh kitty &
 ${WORK_DIR}/run_cmd_forever.sh kitty mc &
