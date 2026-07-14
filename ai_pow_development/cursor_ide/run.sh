@@ -9,9 +9,9 @@ docker run -it -e \
     --mount type=bind,src=${WORKSPACE_PATH},dst=/data \
     -v sys_devel_env.sshkeys.volume:/sshkeys \
     -v cursor_ide_env.browser.data.volume:/root/.config/mozilla/firefox \
-    -v cursor_ide_env.cursor.data.volume:/root/.cursor
+    -v cursor_ide_env.cursor.data.volume:/root/.cursor \
     --name cursor_ide_env_cont \
-    is140608/cursor_ide_env:0.0.1
+    is140608/cursor_ide_env:0.0.2
 
 # TODO with a current user UID/GID
 #   --volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro --user $(id -u):$(id -g) \

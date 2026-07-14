@@ -23,10 +23,12 @@ RUN mkdir /packages
 COPY --from=build /home/builduser/yay-pkgbuild/*pkg.tar.zst  /packages/
 COPY --from=build /home/builduser/cursor-pkgbuild/*pkg.tar.zst  /packages/
 COPY ai_pow_development/cursor_ide/sources/*.sh /
+COPY ai_pow_development/cursor_ide/sources/cursor_extension_list /
 
 RUN <<EOF
+pacman -Syu --noconfirm dbus net-tools
 pacman -U --noconfirm  /packages/*.pkg.tar.zst
-#rm -r /packages/*.pkg.tar.zst
+rm -r /packages/*.pkg.tar.zst
 rm -rf /var/lib/pacman/sync/* /root/.cache/* /tmp/*
 EOF
 

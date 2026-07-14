@@ -3,7 +3,7 @@
 WORK_DIR=$1
 PROJECT_DIR=$2
 SSH_KEYS_DIR=${WORK_DIR}/sshkeys
-echo -e "export WORK_DIR=${WORK_DIR}\nexport PROJECT_DIR=${PROJECT_DIR}\nexport SSH_KEYS_DIR=${SSH_KEYS_DIR}" > ${WORK_DIR}/env.sh
+echo -e "export WORK_DIR=${WORK_DIR}\nexport PROJECT_DIR=${PROJECT_DIR}\nexport SSH_KEYS_DIR=${SSH_KEYS_DIR}\neval $(dbus-launch --sh-syntax)\n" > ${WORK_DIR}/env.sh
 
 
 PRIVATE_KEY_PATH=
@@ -46,11 +46,15 @@ if [ ! -z ${PRIVATE_KEY_PATH} ]; then
     kitty --hold ${WORK_DIR}/register_ssh_key.sh ${PRIVATE_KEY_PATH}
 fi
 
+eval $(dbus-launch --sh-syntax)
+# install cursor extensions
+${WORK_DIR}/install_cursor_extensions.sh ${WORK_DIR}
+
 ${WORK_DIR}/run_cmd_forever.sh geany &
 ${WORK_DIR}/run_cmd_forever.sh kitty &
 ${WORK_DIR}/run_cmd_forever.sh kitty mc &
 #${WORK_DIR}/run_cmd_forever.sh firefox &
-${WORK_DIR}/run_cmd_forever.sh cursor --no-sandbox&
+${WORK_DIR}/run_cmd_forever.sh ${WORK_DIR}/run_cursor.sh &
 
 sleep infinity &
 wait $!
