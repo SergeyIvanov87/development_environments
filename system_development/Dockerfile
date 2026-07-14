@@ -5,7 +5,7 @@ WORKDIR $WORKDIR
 
 RUN <<EOF
 pacman -Syu --noconfirm
-pacman -S --noconfirm --needed geany geany-plugins nano mc kitty diffutils gcc gdb python python-pip python-black python-pylint python-pytest patch git tmuxp openssh strace firefox less sudo xdg-utils xdg-desktop-portal
+pacman -S --noconfirm --needed geany geany-plugins nano mc kitty diffutils gcc gdb python python-pip python-black python-pylint python-pytest patch git tmuxp openssh strace firefox less sudo xdg-utils xdg-desktop-portal net-tools
 pacman -Scc --noconfirm
 rm -rf /var/lib/pacman/sync/* /root/.cache/* /tmp/* /var/tmp/*
 EOF
