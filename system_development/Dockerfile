@@ -36,6 +36,7 @@ EOF
 COPY system_development/sources/patches /patches
 
 RUN <<EOF
+mkdir -p /root/.config
 xdg-settings set default-web-browser firefox.desktop
 xdg-mime default firefox.desktop x-scheme-handler/http
 xdg-mime default firefox.desktop x-scheme-handler/https

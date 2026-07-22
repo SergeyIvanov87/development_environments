@@ -15,11 +15,11 @@ sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/cursor-bi
 pacman -Scc --noconfirm
 EOF
 
-FROM is140608/sys_devel_env:0.0.5 AS base
+FROM is140608/sys_devel_env:latest AS base
 
 ENV WORKDIR=/
 
-RUN mkdir /packages
+RUN mkdir -p /packages
 COPY --from=build /home/builduser/yay-pkgbuild/*pkg.tar.zst  /packages/
 COPY --from=build /home/builduser/cursor-pkgbuild/*pkg.tar.zst  /packages/
 COPY ai_pow_development/cursor_ide/sources/*.sh /
@@ -54,4 +54,15 @@ EOF
 WORKDIR $WORKDIR
 EXPOSE 1455
 VOLUME ["/data", "/sshkeys", "/root/.config/mozilla/firefox", "/root/.cursor"]
+
+ARG GIT_COMMIT=unknown
+ARG CREATED_TS=unknown
+LABEL org.opencontainers.image.title="AI powered by Cursor System-level development utilities(C++,Python)" \
+      org.opencontainers.image.source=https://github.com/SergeyIvanov87/development_environments.git \
+      org.opencontainers.image.description="Contains C++/Python standard libraries, Cursor IDE, lightweight IDE 'Geany', bare-minimum multimedia as Firefox-browser" \
+      org.opencontainers.image.created=${CREATED_TS} \
+      org.opencontainers.image.version=unknown \
+      org.opencontainers.image.revision=${GIT_COMMIT} \
+      org.opencontainers.image.documentation=https://github.com/SergeyIvanov87/development_environments/blob/main/ai_pow_development/cursor_ide/README.md
+
 ENTRYPOINT ["/init.sh", "/", "/data" ]
