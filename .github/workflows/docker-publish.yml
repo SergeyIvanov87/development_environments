@@ -37,7 +37,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Extract metadata (tags, labels) for Docker System-Development
-        id: meta
+        id: meta_sysdev_image
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: is140608/sys_devel_env
@@ -50,18 +50,82 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
 
       - name: Build and push Docker System-Development image
-        id: push
+        id: push_sysdev_image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
           file: ./system_development/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta_sysdev_image.outputs.tags }}
+          labels: ${{ steps.meta_sysdev_image.outputs.labels }}
 
       - name: Generate artifact attestation
         uses: actions/attest@v4
         with:
           subject-name: index.docker.io/is140608/sys_devel_env
-          subject-digest: ${{ steps.push.outputs.digest }}
+          subject-digest: ${{ steps.push_sysdev_image.outputs.digest }}
+          push-to-registry: true
+
+
+
+      - name: Extract metadata (tags, labels) for Docker Codex IDE
+        id: meta_codexide_image
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: is140608/codex_ide_env
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.created={{date 'YYYY-MM-DD'}}
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      - name: Build and push Docker Codex IDE image
+        id: push_codexide_image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./system_development/ai_pow_development/codex_ide/Dockerfile
+          push: true
+          tags: ${{ steps.meta_codexide_image.outputs.tags }}
+          labels: ${{ steps.meta_codexide_image.outputs.labels }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest@v4
+        with:
+          subject-name: index.docker.io/is140608/codex_ide_env
+          subject-digest: ${{ steps.push_codexide_image.outputs.digest }}
+          push-to-registry: true
+
+
+
+      - name: Extract metadata (tags, labels) for Docker Cursor IDE
+        id: meta_cursorxide_image
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: is140608/cursor_ide_env
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.created={{date 'YYYY-MM-DD'}}
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      - name: Build and push Docker Cursor IDE image
+        id: push_cursoride_image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./system_development/ai_pow_development/cursor_ide/Dockerfile
+          push: true
+          tags: ${{ steps.meta_cursorxide_image.outputs.tags }}
+          labels: ${{ steps.meta_cursorxide_image.outputs.labels }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest@v4
+        with:
+          subject-name: index.docker.io/is140608/cursor_ide_env
+          subject-digest: ${{ steps.push_cursoride_image.outputs.digest }}
           push-to-registry: true
