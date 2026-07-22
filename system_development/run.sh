@@ -22,3 +22,11 @@ docker run -d -e \
     -v sys_devel_env.browser.data.volume:/root/.config/mozilla/firefox \
     --name sys_devel_env_cont_${CONTAINER_NAME_SUFFIX} \
     is140608/sys_devel_env:latest
+
+RET=$?
+if [ $RET -ne 0 ]; then
+    echo "Container cannot be started"
+    exit ${RET}
+fi
+
+docker logs sys_devel_env_cont_${CONTAINER_NAME_SUFFIX}

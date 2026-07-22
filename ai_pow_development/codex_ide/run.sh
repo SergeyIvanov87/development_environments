@@ -22,3 +22,11 @@ docker run -d -e \
     -v codec_ide_env.browser.data.volume:/root/.config/mozilla/firefox \
     --name codex_ide_env_${CONTAINER_NAME_SUFFIX} \
     is140608/codex_ide_env:latest
+
+RET=$?
+if [ $RET -ne 0 ]; then
+    echo "Container cannot be started"
+    exit ${RET}
+fi
+
+docker logs codex_ide_env_${CONTAINER_NAME_SUFFIX}

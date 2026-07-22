@@ -23,3 +23,11 @@ docker run -d -e \
     -v cursor_ide_env.cursor.data.volume:/root/.cursor \
     --name cursor_ide_env_${CONTAINER_NAME_SUFFIX} \
     is140608/cursor_ide_env:latest
+
+RET=$?
+if [ $RET -ne 0 ]; then
+    echo "Container cannot be started"
+    exit ${RET}
+fi
+
+docker logs cursor_ide_env_${CONTAINER_NAME_SUFFIX}
