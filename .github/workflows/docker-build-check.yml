@@ -15,7 +15,7 @@ on:
       - main
       - master
       - develop
-      
+
 jobs:
   build_check:
     name: Check Docker image build
@@ -35,6 +35,7 @@ jobs:
           tags: |
             type=raw,value=latest
       - name: Build Docker System-Development image (no push)
+        id: build
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
@@ -46,16 +47,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=${{ runner.temp }}/sysdevel_image.tar
       - name: Test System-Development image is runnable
         id: test_sysdevel_image
         run:  ./system_development/run.sh ./system_development test
-        
+
       - name: Extract metadata (tags, labels) for Docker Codex IDE
         id: codex_ide_meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: is140608/sys_devel_env
+          images: is140608/codex_ide_env
           tags: |
             type=raw,value=latest
       - name: Build Docker Codex IDE (no push)
@@ -73,7 +73,7 @@ jobs:
       - name: Test Codex IDE image is runnable
         id: test_codex_ide_image
         run:  ./ai_pow_development/codex_ide/run.sh ./ai_pow_development/codex_ide test
-        
+
       - name: Extract metadata (tags, labels) for Docker Cursor IDE
         id: cursor_ide_meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
