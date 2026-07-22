@@ -5,6 +5,7 @@ PROJECT_DIR=$2
 SSH_KEYS_DIR=${WORK_DIR}/sshkeys
 echo -e "export WORK_DIR=${WORK_DIR}\nexport PROJECT_DIR=${PROJECT_DIR}\nexport SSH_KEYS_DIR=${SSH_KEYS_DIR}" > ${WORK_DIR}/env.sh
 
+echo "Preparing configuration..."
 
 PRIVATE_KEY_PATH=
 PRIVATE_KEY_NAME=github_sshkey
@@ -48,11 +49,15 @@ fi
 
 eval $(dbus-launch --sh-syntax)
 
+echo "Starting services"
+
 ${WORK_DIR}/run_cmd_forever.sh geany &
 ${WORK_DIR}/run_cmd_forever.sh kitty &
 ${WORK_DIR}/run_cmd_forever.sh kitty mc &
 #${WORK_DIR}/run_cmd_forever.sh firefox &
 ${WORK_DIR}/run_cmd_forever.sh ${WORK_DIR}/run_codex.sh &
+
+echo "Services have been started"
 
 sleep infinity &
 wait $!
