@@ -43,6 +43,8 @@ jobs:
           images: is140608/sys_devel_env
           tags: |
             type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
           labels: |
             org.opencontainers.image.created={{date 'YYYY-MM-DD'}}
             org.opencontainers.image.revision=${{ github.sha }}
