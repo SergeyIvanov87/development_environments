@@ -49,7 +49,41 @@ jobs:
           cache-to: type=gha,mode=max
       - name: Test System-Development image is runnable
         id: test_sysdevel_image
-        run:  ./system_development/run.sh ./system_development test
+        run: |
+          # Skip xhost if not on a display
+          if [ -n "$DISPLAY" ]; then
+            xhost +local:
+          fi
+          # Launch container in background
+          CONTAINER_ID=$(docker run -d \
+            --mount type=bind,src=./system_development,dst=/data \
+            is140608/sys_devel_env:latest)
+          echo "Container started with ID: $CONTAINER_ID"
+          # Retry loop: 3 attempts to find the string in logs
+          for i in 1 2 3; do
+            echo "Check attempt $i/3..."
+            # Check for the required string in logs
+            if docker logs "$CONTAINER_ID" | grep -q "Preparing configuration..."; then
+              echo "✓ Found 'Preparing configuration...' in container logs"
+              # Clean up container
+              docker stop "$CONTAINER_ID" || true
+              docker rm "$CONTAINER_ID" || true
+              exit 0
+            fi
+            # If not the last iteration, wait before retrying
+            if [ $i -lt 3 ]; then
+              echo "String not found yet, waiting 5 seconds before retry..."
+              sleep 5
+            fi
+          done
+          # All retries exhausted
+          echo "✗ Error: 'Preparing configuration...' not found after 3 attempts"
+          echo "Container logs:"
+          docker logs "$CONTAINER_ID"
+          # Clean up container
+          docker stop "$CONTAINER_ID" || true
+          docker rm "$CONTAINER_ID" || true
+          exit 1
 
       - name: Extract metadata (tags, labels) for Docker Codex IDE
         id: codex_ide_meta
