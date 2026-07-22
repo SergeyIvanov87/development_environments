@@ -40,11 +40,17 @@ jobs:
           context: .
           file: ./system_development/Dockerfile
           push: false
+          load: true
+          platforms: linux/amd64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
+          outputs: type=docker,dest=${{ runner.temp }}/sysdevel_image.tar
+      - name: Test System-Development image is runnable
+        id: test_sysdevel_image
+        run:  ./system_development/run.sh ./system_development test
+        
       - name: Extract metadata (tags, labels) for Docker Codex IDE
         id: codex_ide_meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -58,11 +64,16 @@ jobs:
           context: .
           file: ./ai_pow_development/codex_ide/Dockerfile
           push: false
+          load: true
+          platforms: linux/amd64
           tags: ${{ steps.codex_ide_meta.outputs.tags }}
           labels: ${{ steps.codex_ide_meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
+      - name: Test Codex IDE image is runnable
+        id: test_codex_ide_image
+        run:  ./ai_pow_development/codex_ide/run.sh ./ai_pow_development/codex_ide test
+        
       - name: Extract metadata (tags, labels) for Docker Cursor IDE
         id: cursor_ide_meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -76,7 +87,12 @@ jobs:
           context: .
           file: ./ai_pow_development/cursor_ide/Dockerfile
           push: false
+          load: true
+          platforms: linux/amd64
           tags: ${{ steps.cursor_ide_meta.outputs.tags }}
           labels: ${{ steps.cursor_ide_meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Test Cursor IDE image is runnable
+        id: test_cursor_ide_image
+        run:  ./ai_pow_development/cursor_ide/run.sh ./ai_pow_development/cursor_ide test
