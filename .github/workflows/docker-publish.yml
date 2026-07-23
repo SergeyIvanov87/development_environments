@@ -86,7 +86,7 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
-          file: ./system_development/ai_pow_development/codex_ide/Dockerfile
+          file: ./ai_pow_development/codex_ide/Dockerfile
           push: true
           tags: ${{ steps.meta_codexide_image.outputs.tags }}
           labels: ${{ steps.meta_codexide_image.outputs.labels }}
@@ -118,7 +118,7 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
-          file: ./system_development/ai_pow_development/cursor_ide/Dockerfile
+          file: ./ai_pow_development/cursor_ide/Dockerfile
           push: true
           tags: ${{ steps.meta_cursorxide_image.outputs.tags }}
           labels: ${{ steps.meta_cursorxide_image.outputs.labels }}
