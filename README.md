@@ -5,3 +5,9 @@ docker buildx build -f system_development/Dockerfile -t is140608/sys_devel_env:l
 # to build ai_devel
 
 docker buildx build -f ai_devel/Dockerfile --tag ai_devel:latest .
+
+# Code OSS C++/Python IDE
+
+See [Code OSS IDE](ai_pow_development/code_oss_ide/README.md) for the open-source
+VS Code desktop image with clangd, Pyright, Ruff, Continue inline completion,
+and Codex/Claude Code integrations.

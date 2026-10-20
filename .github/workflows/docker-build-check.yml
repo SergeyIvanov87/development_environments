@@ -191,3 +191,86 @@ jobs:
           docker stop "$CONTAINER_ID" || true
           docker rm "$CONTAINER_ID" || true
           exit 1
+
+  code_oss_build_check:
+    name: Check Code OSS image and tooling
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+
+      - name: Check shell scripts and settings
+        run: |
+          bash -n ai_pow_development/code_oss_ide/run.sh
+          for script in ai_pow_development/code_oss_ide/sources/*.sh; do
+            bash -n "$script"
+          done
+          python -m json.tool ai_pow_development/code_oss_ide/sources/settings.json >/dev/null
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker
+
+      - name: Build Code OSS image (no push)
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./ai_pow_development/code_oss_ide/Dockerfile
+          push: false
+          load: true
+          tags: is140608/code_oss_ide_env:ci
+          build-args: |
+            GIT_COMMIT=${{ github.sha }}
+
+      - name: Check extensions, configuration and C++/Python tooling
+        run: docker run --rm --entrypoint /opt/code-oss/check.sh is140608/code_oss_ide_env:ci
+
+      - name: Test Code OSS starts with an extension host under Xvfb
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xvfb
+          # CI uses a disposable local display without a TCP listener.
+          Xvfb :99 -screen 0 1280x800x24 -nolisten tcp -ac &
+          xvfb_pid=$!
+          container_id=
+          # Invoked by the EXIT trap.
+          # shellcheck disable=SC2329
+          cleanup() {
+            if [[ -n "$container_id" ]]; then
+              docker logs "$container_id" || true
+              docker rm -f "$container_id" >/dev/null || true
+            fi
+            kill "$xvfb_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+          for attempt in {1..30}; do
+            echo "Waiting for Xvfb ($attempt/30)"
+            [[ -S /tmp/.X11-unix/X99 ]] && break
+            kill -0 "$xvfb_pid"
+            sleep 1
+          done
+          test -S /tmp/.X11-unix/X99
+          mkdir -p "${RUNNER_TEMP}/code-oss-workspace"
+          printf 'print("Code OSS smoke test")\n' > "${RUNNER_TEMP}/code-oss-workspace/main.py"
+          container_id=$(docker run -d --init --shm-size=256m -e DISPLAY=:99 \
+            --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix,readonly \
+            --mount "type=bind,src=${RUNNER_TEMP}/code-oss-workspace,dst=/data" \
+            is140608/code_oss_ide_env:ci /data /data/main.py \
+            --skip-welcome --skip-release-notes --disable-workspace-trust)
+          for attempt in {1..30}; do
+            echo "Waiting for the Code OSS extension host ($attempt/30)"
+            test "$(docker inspect --format '{{.State.Running}}' "$container_id")" = true
+            if timeout 10s docker exec "$container_id" code --status 2>&1 | grep 'extensionHost' >/dev/null; then
+              echo "Code OSS and its extension host are running"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Code OSS did not start an extension host" >&2
+          exit 1

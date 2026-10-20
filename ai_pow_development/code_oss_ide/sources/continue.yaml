@@ -1,0 +1,18 @@
+name: Local C++ and Python
+version: 1.0.0
+schema: v1
+models:
+  - name: Local coding assistant
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: http://host.docker.internal:11434
+    roles:
+      - chat
+      - edit
+      - apply
+  - name: Local inline completion
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    apiBase: http://host.docker.internal:11434
+    roles:
+      - autocomplete

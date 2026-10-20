@@ -1,0 +1,24 @@
+{
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.path": "clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy",
+    "--completion-style=detailed",
+    "--header-insertion=iwyu"
+  ],
+  "python.languageServer": "None",
+  "python.defaultInterpreterPath": "/usr/bin/python",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
+  "editor.inlineSuggest.enabled": true,
+  "continue.enableTabAutocomplete": true,
+  "continue.telemetryEnabled": false,
+  "chatgpt.openOnStartup": false,
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": false,
+  "telemetry.telemetryLevel": "off",
+  "extensions.ignoreRecommendations": true
+}
