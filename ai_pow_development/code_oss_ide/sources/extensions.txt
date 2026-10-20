@@ -1,0 +1,10 @@
+llvm-vs-code-extensions.vscode-clangd
+vadimcn.vscode-lldb
+twxs.cmake
+ms-python.python
+ms-pyright.pyright
+charliermarsh.ruff
+Continue.continue
+ms-python.debugpy
+openai.chatgpt
+Anthropic.claude-code
